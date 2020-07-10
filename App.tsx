@@ -6,20 +6,34 @@ import {
   ScrollView,
   StatusBar,
   Text,
+  Image,
 } from 'react-native';
 import {NavigationContainer} from '@react-navigation/native';
 // @ts-ignore
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 import ReceiveSharingIntent from 'react-native-receive-sharing-intent';
+import urlRegex from 'url-regex';
+// import urlMetadata from 'url-metadata';
 
 const App = () => {
-  const [url, setUrl] = useState<string | null | undefined>();
+  const [image, setImage] = useState<string>();
   useEffect(() => {
     ReceiveSharingIntent.getReceivedFiles(
       (files: any) => {
         files.forEach((file: any) => {
           const {text} = file;
-          setUrl(text);
+          const urls = text.match(urlRegex());
+          // const metadata = urlMetadata(urls[0]);
+          // metadata.then((data) => {
+          fetch(
+            `https://us-central1-tell-me-what-to-eat-94d90.cloudfunctions.net/getMetadata?url=${urls[0]}`,
+          ).then((response) => {
+            response.json().then((body: any) => {
+              console.warn(body.image);
+              setImage(body.image);
+            });
+          });
+          // });
         });
       },
       (error: any) => {
@@ -35,7 +49,7 @@ const App = () => {
         <ScrollView
           contentInsetAdjustmentBehavior="automatic"
           style={styles.scrollView}>
-          <Text>{url}</Text>
+          <Image style={styles.image} source={{uri: image}} />
         </ScrollView>
       </SafeAreaView>
     </NavigationContainer>
@@ -44,6 +58,10 @@ const App = () => {
 
 const styles = StyleSheet.create({
   scrollView: {},
+  image: {
+    width: 200,
+    height: 200,
+  },
 });
 
 export default App;
