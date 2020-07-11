@@ -1,7 +1,8 @@
 import * as functions from 'firebase-functions';
 import fetch from 'node-fetch';
 import * as domino from 'domino';
-import {getMetadata} from 'page-metadata-parser';
+import UserAgent from 'user-agents';
+import {getMetadata, IPageMetadata} from 'page-metadata-parser';
 
 exports.getMetadata = functions
   .region('europe-west1')
@@ -22,12 +23,13 @@ exports.getMetadata = functions
   });
 
 const getData = async (url: string) => {
-  const response = await fetch(url, {
+  const userAgent = new UserAgent({deviceCategory: 'mobile'});
+  const response = await fetch(`${url}?t=${Date.now()}`, {
     method: 'GET',
     headers: {
       'Content-Type': 'text/xml',
       From: 'development@q42.nl',
-      'User-Agent': 'TellMeWhatToEat App',
+      'User-Agent': userAgent.toString(),
     },
     follow: 10,
     timeout: 30000,
@@ -35,15 +37,19 @@ const getData = async (url: string) => {
   const html = await response.text();
   const doc = domino.createWindow(html).document;
   const metadata = getMetadata(doc, url);
+  return getSpecificProviderData(doc, metadata);
+};
+
+const getSpecificProviderData = (doc: Document, metadata: IPageMetadata) => {
   if (metadata.provider === 'ah') {
     metadata.title = metadata?.title?.replace(' - Recept - Allerhande', '');
   }
   if (metadata.provider === 'jumbo') {
-    const el = doc.querySelector(
-      'figure[data-jum-product-image="default-main-image"]',
-    );
-    const img = el?.querySelector('img');
-    metadata.image = img?.src;
+    const img = doc.querySelector(
+      'figure.jum-product-image > img',
+    ) as HTMLImageElement;
+    metadata.image =
+      img?.getAttribute('data-jum-src') || img?.nodeName || metadata.image;
   }
   return metadata;
 };
