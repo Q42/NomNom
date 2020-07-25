@@ -4,6 +4,7 @@ import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {FlatGrid} from 'react-native-super-grid';
+import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 
 const Search = () => {
 	const navigation = useNavigation();
@@ -45,13 +46,16 @@ const Search = () => {
 				style={styles.gridView}
 				spacing={10}
 				renderItem={({item}) => (
-					<View style={styles.itemContainer}>
-						<FastImage
-							style={styles.image}
-							source={{uri: item.imageUrl}}
-							resizeMode={FastImage.resizeMode.cover}
-						/>
-					</View>
+					<TouchableWithoutFeedback
+						onPress={() => navigation.navigate('Create')}>
+						<View style={styles.itemContainer}>
+							<FastImage
+								style={styles.image}
+								source={{uri: item.imageUrl}}
+								resizeMode={FastImage.resizeMode.cover}
+							/>
+						</View>
+					</TouchableWithoutFeedback>
 				)}
 			/>
 		</SafeAreaView>
