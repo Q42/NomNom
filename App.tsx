@@ -10,11 +10,14 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 import Share from './src/components/screens/Share';
 import Start from './src/components/screens/Start';
 import Search from './src/components/screens/Search';
+import Add from './src/components/screens/Add';
 import ReceiveSharingIntent from 'react-native-receive-sharing-intent';
 import urlRegex from 'url-regex';
+import {ColorSchemeProvider} from 'react-native-dynamic';
 
 export type RootStackParamList = {
 	Share: {urls: string[]};
+	Add: {imageUrl: string; title: string};
 };
 
 const MainStack = createStackNavigator();
@@ -31,6 +34,11 @@ function MainStackScreen() {
 			<MainStack.Screen
 				name="Search"
 				component={Search}
+				options={{title: '', headerTransparent: true}}
+			/>
+			<MainStack.Screen
+				name="Add"
+				component={Add}
 				options={{title: '', headerTransparent: true}}
 			/>
 		</MainStack.Navigator>
@@ -56,18 +64,20 @@ const App = () => {
 	return (
 		<NavigationContainer ref={navigation}>
 			<SafeAreaProvider>
-				<RootStack.Navigator mode="modal">
-					<RootStack.Screen
-						name="Main"
-						component={MainStackScreen}
-						options={{headerShown: false}}
-					/>
-					<RootStack.Screen
-						name="Share"
-						component={Share}
-						options={{title: '', headerTransparent: true}}
-					/>
-				</RootStack.Navigator>
+				<ColorSchemeProvider>
+					<RootStack.Navigator mode="modal">
+						<RootStack.Screen
+							name="Main"
+							component={MainStackScreen}
+							options={{headerShown: false}}
+						/>
+						<RootStack.Screen
+							name="Share"
+							component={Share}
+							options={{title: '', headerTransparent: true}}
+						/>
+					</RootStack.Navigator>
+				</ColorSchemeProvider>
 			</SafeAreaProvider>
 		</NavigationContainer>
 	);

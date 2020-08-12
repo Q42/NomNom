@@ -29,9 +29,7 @@ const Share = (props: Props) => {
 
 	return (
 		<SafeAreaView>
-			<ScrollView
-				contentInsetAdjustmentBehavior="automatic"
-				style={styles.scrollView}>
+			<ScrollView contentInsetAdjustmentBehavior="automatic">
 				<Image style={styles.image} source={{uri: image}} />
 			</ScrollView>
 		</SafeAreaView>
@@ -39,7 +37,7 @@ const Share = (props: Props) => {
 };
 
 const styles = StyleSheet.create({
-	scrollView: {},
+	flex: {},
 	image: {
 		width: 200,
 		height: 200,

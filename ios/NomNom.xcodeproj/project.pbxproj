@@ -18,6 +18,15 @@
 		6DE1035BF7DE317FE9E328C2 /* libPods-NomNom.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0B32E30124374EF66F22F144 /* libPods-NomNom.a */; };
 		81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 81AB9BB72411601600AC10FF /* LaunchScreen.storyboard */; };
 		C5A2E9E15985BB9A5A338FCD /* libPods-NomNom-NomNomTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 0F36FD6641BD6D81442298FE /* libPods-NomNom-NomNomTests.a */; };
+		63AE2C898C8C4160A61E98B7 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = 8CE497ECA68043019A20D8F1 /* Quicksand-Bold.otf */; };
+		CE91FEA4A781438A955F394F /* Quicksand-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = FA486A3888BC4AFF89BF9306 /* Quicksand-Light.otf */; };
+		C968DBE8984349BBB17DB077 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = E3F3FE09FA5A4C4C9F94FB78 /* Quicksand-Regular.otf */; };
+		311E576F600D4346A247313F /* Nobile-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 6C1DBF40FD66466F8B7CCA3B /* Nobile-Bold.ttf */; };
+		C2E02153BA874B23B7B4F58C /* Nobile-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = B0765F4964F04B3A91AE01A2 /* Nobile-Regular.ttf */; };
+		326EE7D1ACA74C16A06D84F2 /* OpenSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 042D59867DE74BC09501316C /* OpenSans-Regular.ttf */; };
+		108BA5D4F70A43B8AD45C647 /* Quicksand-Bold.otf in Resources */ = {isa = PBXBuildFile; fileRef = AC4F4A62FF134BBB9844352F /* Quicksand-Bold.otf */; };
+		A144B809C669459687FD94B1 /* Quicksand-Light.otf in Resources */ = {isa = PBXBuildFile; fileRef = F9A272A959E94C7BA05BB637 /* Quicksand-Light.otf */; };
+		96A44241F4B4490390991912 /* Quicksand-Regular.otf in Resources */ = {isa = PBXBuildFile; fileRef = FDF348B74EEF46CDB97E8EE4 /* Quicksand-Regular.otf */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -59,6 +68,15 @@
 		ED297162215061F000B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = System/Library/Frameworks/JavaScriptCore.framework; sourceTree = SDKROOT; };
 		ED2971642150620600B7C4FE /* JavaScriptCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = JavaScriptCore.framework; path = Platforms/AppleTVOS.platform/Developer/SDKs/AppleTVOS12.0.sdk/System/Library/Frameworks/JavaScriptCore.framework; sourceTree = DEVELOPER_DIR; };
 		F3E913972B31574447799D3B /* Pods-NomNom.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-NomNom.debug.xcconfig"; path = "Target Support Files/Pods-NomNom/Pods-NomNom.debug.xcconfig"; sourceTree = "<group>"; };
+		8CE497ECA68043019A20D8F1 /* Quicksand-Bold.otf */ = {isa = PBXFileReference; name = "Quicksand-Bold.otf"; path = "../src/assets/fonts/Quicksand-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FA486A3888BC4AFF89BF9306 /* Quicksand-Light.otf */ = {isa = PBXFileReference; name = "Quicksand-Light.otf"; path = "../src/assets/fonts/Quicksand-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		E3F3FE09FA5A4C4C9F94FB78 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; name = "Quicksand-Regular.otf"; path = "../src/assets/fonts/Quicksand-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		6C1DBF40FD66466F8B7CCA3B /* Nobile-Bold.ttf */ = {isa = PBXFileReference; name = "Nobile-Bold.ttf"; path = "../assets/fonts/Nobile-Bold.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		B0765F4964F04B3A91AE01A2 /* Nobile-Regular.ttf */ = {isa = PBXFileReference; name = "Nobile-Regular.ttf"; path = "../assets/fonts/Nobile-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		042D59867DE74BC09501316C /* OpenSans-Regular.ttf */ = {isa = PBXFileReference; name = "OpenSans-Regular.ttf"; path = "../assets/fonts/OpenSans-Regular.ttf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		AC4F4A62FF134BBB9844352F /* Quicksand-Bold.otf */ = {isa = PBXFileReference; name = "Quicksand-Bold.otf"; path = "../assets/fonts/Quicksand-Bold.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		F9A272A959E94C7BA05BB637 /* Quicksand-Light.otf */ = {isa = PBXFileReference; name = "Quicksand-Light.otf"; path = "../assets/fonts/Quicksand-Light.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
+		FDF348B74EEF46CDB97E8EE4 /* Quicksand-Regular.otf */ = {isa = PBXFileReference; name = "Quicksand-Regular.otf"; path = "../assets/fonts/Quicksand-Regular.otf"; sourceTree = "<group>"; fileEncoding = undefined; lastKnownFileType = unknown; explicitFileType = undefined; includeInIndex = 0; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -153,6 +171,7 @@
 				83CBBA001A601CBA00E9B192 /* Products */,
 				2D16E6871FA4F8E400B85C8A /* Frameworks */,
 				896751923113820FB4EA36BE /* Pods */,
+				D31E18C9930049E7978711D0 /* Resources */,
 			);
 			indentWidth = 2;
 			sourceTree = "<group>";
@@ -180,6 +199,23 @@
 			);
 			path = Pods;
 			sourceTree = "<group>";
+		};
+		D31E18C9930049E7978711D0 /* Resources */ = {
+			isa = "PBXGroup";
+			children = (
+				8CE497ECA68043019A20D8F1 /* Quicksand-Bold.otf */,
+				FA486A3888BC4AFF89BF9306 /* Quicksand-Light.otf */,
+				E3F3FE09FA5A4C4C9F94FB78 /* Quicksand-Regular.otf */,
+				6C1DBF40FD66466F8B7CCA3B /* Nobile-Bold.ttf */,
+				B0765F4964F04B3A91AE01A2 /* Nobile-Regular.ttf */,
+				042D59867DE74BC09501316C /* OpenSans-Regular.ttf */,
+				AC4F4A62FF134BBB9844352F /* Quicksand-Bold.otf */,
+				F9A272A959E94C7BA05BB637 /* Quicksand-Light.otf */,
+				FDF348B74EEF46CDB97E8EE4 /* Quicksand-Regular.otf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+			path = "";
 		};
 /* End PBXGroup section */
 
@@ -323,6 +359,15 @@
 			files = (
 				81AB9BB82411601600AC10FF /* LaunchScreen.storyboard in Resources */,
 				13B07FBF1A68108700A75B9A /* Images.xcassets in Resources */,
+				63AE2C898C8C4160A61E98B7 /* Quicksand-Bold.otf in Resources */,
+				CE91FEA4A781438A955F394F /* Quicksand-Light.otf in Resources */,
+				C968DBE8984349BBB17DB077 /* Quicksand-Regular.otf in Resources */,
+				311E576F600D4346A247313F /* Nobile-Bold.ttf in Resources */,
+				C2E02153BA874B23B7B4F58C /* Nobile-Regular.ttf in Resources */,
+				326EE7D1ACA74C16A06D84F2 /* OpenSans-Regular.ttf in Resources */,
+				108BA5D4F70A43B8AD45C647 /* Quicksand-Bold.otf in Resources */,
+				A144B809C669459687FD94B1 /* Quicksand-Light.otf in Resources */,
+				96A44241F4B4490390991912 /* Quicksand-Regular.otf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

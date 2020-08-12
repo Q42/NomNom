@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState, useCallback} from 'react';
 import {Keyboard, StatusBar, StyleSheet, TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -27,8 +27,12 @@ const Search = () => {
 		};
 	}, [navigation, value]);
 
+	const onSubmit = useCallback(() => {
+		setItems(mock);
+	}, []);
+
 	return (
-		<SafeAreaView>
+		<SafeAreaView mode={'padding'}>
 			<StatusBar
 				translucent={true}
 				barStyle="dark-content"
@@ -38,16 +42,21 @@ const Search = () => {
 				autoFocus={true}
 				returnKeyType={'search'}
 				onChangeText={(text) => onChangeText(text)}
+				onSubmitEditing={() => onSubmit()}
 				value={value}
 			/>
 			<FlatGrid
-				itemDimension={130}
 				data={items}
 				style={styles.gridView}
 				spacing={10}
 				renderItem={({item}) => (
 					<TouchableWithoutFeedback
-						onPress={() => navigation.navigate('Create')}>
+						onPress={() =>
+							navigation.navigate('Add', {
+								title: value,
+								imageUrl: item.imageUrl,
+							})
+						}>
 						<View style={styles.itemContainer}>
 							<FastImage
 								style={styles.image}
