@@ -1,13 +1,22 @@
 import React, {useEffect, useState, useCallback} from 'react';
-import {Keyboard, StatusBar, StyleSheet, TextInput, View} from 'react-native';
+import {Keyboard, StatusBar, TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {SafeAreaView} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {FlatGrid} from 'react-native-super-grid';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
+import Fonts from '../../styles/fonts';
+import {
+	DynamicStyleSheet,
+	DynamicValue,
+	useDynamicValue,
+} from 'react-native-dynamic';
+import Colors from '../../styles/colors';
 
 const Search = () => {
+	const styles = useDynamicValue(dynamicStyles);
 	const navigation = useNavigation();
+	const insets = useSafeAreaInsets();
 	const [items, setItems] = useState<any>([]);
 	const [value, onChangeText] = useState<string>();
 
@@ -32,23 +41,30 @@ const Search = () => {
 	}, []);
 
 	return (
-		<SafeAreaView mode={'padding'}>
+		<View style={styles.container}>
 			<StatusBar
 				translucent={true}
-				barStyle="dark-content"
+				barStyle="light-content"
 				backgroundColor={'transparent'}
-			/>
-			<TextInput
-				autoFocus={true}
-				returnKeyType={'search'}
-				onChangeText={(text) => onChangeText(text)}
-				onSubmitEditing={() => onSubmit()}
-				value={value}
 			/>
 			<FlatGrid
 				data={items}
-				style={styles.gridView}
-				spacing={10}
+				ListHeaderComponent={
+					<>
+						<TextInput
+							style={[styles.input, {marginTop: insets.top}]}
+							selectionColor={Colors.white}
+							autoFocus={true}
+							returnKeyType={'search'}
+							onChangeText={(text) => onChangeText(text)}
+							onSubmitEditing={() => onSubmit()}
+							value={value}
+						/>
+					</>
+				}
+				ListHeaderComponentStyle={styles.header}
+				contentContainerStyle={{paddingBottom: insets.bottom}}
+				spacing={20}
 				renderItem={({item}) => (
 					<TouchableWithoutFeedback
 						onPress={() =>
@@ -67,15 +83,37 @@ const Search = () => {
 					</TouchableWithoutFeedback>
 				)}
 			/>
-		</SafeAreaView>
+		</View>
 	);
 };
 
 export default Search;
 
-const styles = StyleSheet.create({
+const dynamicStyles = new DynamicStyleSheet({
 	gridView: {
-		marginTop: 10,
+		marginTop: 20,
+	},
+	header: {
+		marginBottom: 30,
+	},
+	gridContainer: {
+		borderTopStartRadius: 20,
+		borderTopEndRadius: 20,
+		backgroundColor: new DynamicValue(Colors.white, Colors.dark),
+	},
+	container: {
+		flex: 1,
+		flexGrow: 1,
+		backgroundColor: Colors.primary,
+	},
+	input: {
+		...Fonts.nobileBold,
+		marginVertical: 10,
+		marginHorizontal: 20,
+		fontSize: 18,
+		color: Colors.white,
+		borderBottomColor: Colors.white,
+		borderBottomWidth: 2,
 	},
 	itemContainer: {
 		borderRadius: 10,
