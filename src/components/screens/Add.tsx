@@ -21,6 +21,7 @@ import Button from '../Button';
 import {FlatGrid} from 'react-native-super-grid';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/Ionicons';
+import {SafeAreaView} from 'react-native-safe-area-context';
 
 type ShareScreenRouteProp = RouteProp<RootStackParamList, 'Add'>;
 
@@ -67,7 +68,7 @@ const Add = (props: Props) => {
 	]);
 
 	return (
-		<ScrollView contentContainerStyle={styles.flex}>
+		<>
 			<Image style={styles.image} source={{uri: imageUrl}} />
 			<View style={[styles.bottomContainer, styles.grow]}>
 				<View style={[styles.inputContainer]}>
@@ -78,7 +79,7 @@ const Add = (props: Props) => {
 						value={value}
 					/>
 				</View>
-				<View style={styles.grow}>
+				<View style={[styles.grow, styles.tagContainer]}>
 					<FlatGrid
 						spacing={20}
 						data={tags}
@@ -115,16 +116,15 @@ const Add = (props: Props) => {
 						)}
 					/>
 				</View>
-				<Button style={styles.button} text={'Toevoegen'} />
+				<SafeAreaView>
+					<Button style={styles.button} text={'Toevoegen'} />
+				</SafeAreaView>
 			</View>
-		</ScrollView>
+		</>
 	);
 };
 
 const dynamicStyles = new DynamicStyleSheet({
-	flex: {
-		flex: 1,
-	},
 	grow: {
 		flexGrow: 1,
 	},
@@ -134,6 +134,13 @@ const dynamicStyles = new DynamicStyleSheet({
 		borderRadius: 20,
 		marginHorizontal: 25,
 		justifyContent: 'space-between',
+		shadowColor: '#444',
+		shadowOffset: {
+			width: 0,
+			height: 6,
+		},
+		shadowOpacity: 0.37,
+		shadowRadius: 7.49,
 		elevation: 12,
 	},
 	itemContainer: {
@@ -147,7 +154,7 @@ const dynamicStyles = new DynamicStyleSheet({
 		backgroundColor: Colors.secondary,
 	},
 	itemText: {
-		...Fonts.nobileRegular,
+		...Fonts.openSansRegular,
 		fontSize: 16,
 		textAlign: 'center',
 		color: Colors.secondary,
@@ -166,10 +173,14 @@ const dynamicStyles = new DynamicStyleSheet({
 		backgroundColor: new DynamicValue(Colors.silver, Colors.chocolate),
 		flexDirection: 'column',
 	},
+	tagContainer: {
+		padding: 10,
+	},
 	input: {
-		...Fonts.nobileBold,
+		...Fonts.openSansRegular,
 		marginVertical: 10,
 		marginHorizontal: 20,
+		padding: 10,
 		fontSize: 18,
 		color: new DynamicValue(Colors.chocolate, Colors.white),
 	},

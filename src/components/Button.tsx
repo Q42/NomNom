@@ -3,7 +3,6 @@ import {TouchableNativeFeedback} from 'react-native-gesture-handler';
 import {StyleSheet, Text, View, ViewProps} from 'react-native';
 import Colors from '../styles/colors';
 import Fonts from '../styles/fonts';
-import Icon from 'react-native-vector-icons/Ionicons';
 
 interface ButtonProps extends ViewProps {
 	text: String;
@@ -15,11 +14,6 @@ const Button = (props: ButtonProps) => {
 			<TouchableNativeFeedback>
 				<View style={styles.container}>
 					<Text style={styles.text}>{props.text}</Text>
-					<Icon
-						name={'chevron-forward-circle-outline'}
-						size={32}
-						color={Colors.white}
-					/>
 				</View>
 			</TouchableNativeFeedback>
 		</View>

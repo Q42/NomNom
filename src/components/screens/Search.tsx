@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {Keyboard, StatusBar, TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {FlatGrid} from 'react-native-super-grid';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -107,7 +107,7 @@ const dynamicStyles = new DynamicStyleSheet({
 		backgroundColor: Colors.primary,
 	},
 	input: {
-		...Fonts.nobileBold,
+		...Fonts.openSansRegular,
 		marginVertical: 10,
 		marginHorizontal: 20,
 		fontSize: 18,
