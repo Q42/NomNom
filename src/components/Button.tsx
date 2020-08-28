@@ -1,17 +1,26 @@
 import React from 'react';
 import {TouchableNativeFeedback} from 'react-native-gesture-handler';
-import {StyleSheet, Text, View, ViewProps} from 'react-native';
+import {
+	GestureResponderEvent,
+	StyleProp,
+	StyleSheet,
+	Text,
+	View,
+	ViewStyle,
+} from 'react-native';
 import Colors from '../styles/colors';
 import Fonts from '../styles/fonts';
 
-interface ButtonProps extends ViewProps {
+interface ButtonProps {
 	text: String;
+	style: StyleProp<ViewStyle>;
+	onPress?: (event: GestureResponderEvent) => void;
 }
 
 const Button = (props: ButtonProps) => {
 	return (
 		<View style={props.style}>
-			<TouchableNativeFeedback>
+			<TouchableNativeFeedback onPress={props.onPress}>
 				<View style={styles.container}>
 					<Text style={styles.text}>{props.text}</Text>
 				</View>
