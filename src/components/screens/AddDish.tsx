@@ -5,25 +5,24 @@ import {
 	DynamicValue,
 	useDynamicValue,
 } from 'react-native-dynamic';
-import {Image, TextInput, View, Dimensions, Text} from 'react-native';
+import {Image, TextInput, View, Dimensions} from 'react-native';
 import {RouteProp, useNavigation} from '@react-navigation/native';
 import {RootStackParamList} from '../../../App';
 import Colors from '../../styles/colors';
 import Fonts from '../../styles/fonts';
 import Button from '../Button';
 import {FlatGrid} from 'react-native-super-grid';
-import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
-import Icon from 'react-native-vector-icons/Ionicons';
 import {SafeAreaView} from 'react-native-safe-area-context';
 import TagService from '../../services/tagService';
 import DishService from '../../services/dishService';
 import {StackNavigationProp} from '@react-navigation/stack';
+import SelectionTile from '../SelectionTile';
 
 type Props = {
 	route: ShareScreenRouteProp;
 };
 
-const Add = (props: Props) => {
+const AddDish = (props: Props) => {
 	const styles = useDynamicValue(dynamicStyles);
 
 	const navigation = useNavigation<ShareScreenStackNavigationProp>();
@@ -61,38 +60,21 @@ const Add = (props: Props) => {
 						data={tags}
 						scrollEnabled={false}
 						renderItem={({item}) => (
-							<TouchableWithoutFeedback
-								key={item.title}
+							<SelectionTile
 								onPress={() => {
 									const t = [...tags];
 									const index = t.findIndex((i) => i.title === item.title);
 									t[index].checked = !item.checked;
 									onChangeTagSelection(t);
-								}}>
-								<View
-									style={[
-										styles.itemContainer,
-										item.checked ? styles.itemContainerSelected : null,
-									]}>
-									<Icon
-										style={styles.icon}
-										name={item.icon}
-										size={38}
-										color={item.checked ? Colors.white : Colors.secondary}
-									/>
-									<Text
-										style={[
-											styles.itemText,
-											item.checked ? styles.itemTextSelected : null,
-										]}>
-										{item.title}
-									</Text>
-								</View>
-							</TouchableWithoutFeedback>
+								}}
+								title={item.title}
+								icon={item.icon}
+								checked={item.checked}
+							/>
 						)}
 					/>
 				</View>
-				<SafeAreaView>
+				<SafeAreaView edges={['bottom']}>
 					<Button style={styles.button} text={'Toevoegen'} onPress={onSubmit} />
 				</SafeAreaView>
 			</View>
@@ -118,29 +100,6 @@ const dynamicStyles = new DynamicStyleSheet({
 		shadowOpacity: 0.37,
 		shadowRadius: 7.49,
 		elevation: 12,
-	},
-	itemContainer: {
-		borderRadius: 10,
-		borderColor: Colors.secondary,
-		borderWidth: 2,
-		paddingHorizontal: 5,
-		paddingVertical: 10,
-	},
-	itemContainerSelected: {
-		backgroundColor: Colors.secondary,
-	},
-	itemText: {
-		...Fonts.openSansRegular,
-		fontSize: 16,
-		textAlign: 'center',
-		color: Colors.secondary,
-	},
-	icon: {
-		paddingBottom: 5,
-		alignSelf: 'center',
-	},
-	itemTextSelected: {
-		color: Colors.white,
 	},
 	bottomContainer: {
 		marginTop: -20,
@@ -169,10 +128,10 @@ const dynamicStyles = new DynamicStyleSheet({
 	},
 });
 
-type ShareScreenRouteProp = RouteProp<RootStackParamList, 'Add'>;
+type ShareScreenRouteProp = RouteProp<RootStackParamList, 'AddDish'>;
 type ShareScreenStackNavigationProp = StackNavigationProp<
 	RootStackParamList,
-	'Add'
+	'AddDish'
 >;
 
-export default Add;
+export default AddDish;

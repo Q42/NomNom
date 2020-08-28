@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useCallback} from 'react';
 import {Keyboard, StatusBar, TextInput, View} from 'react-native';
 import FastImage from 'react-native-fast-image';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import {useNavigation} from '@react-navigation/native';
 import {FlatGrid} from 'react-native-super-grid';
 import {TouchableWithoutFeedback} from 'react-native-gesture-handler';
@@ -13,6 +13,7 @@ import {
 } from 'react-native-dynamic';
 import Colors from '../../styles/colors';
 import RecipeService from '../../services/recipeService';
+import {ScreenName} from '../../../App';
 
 const Search = () => {
 	const styles = useDynamicValue(dynamicStyles);
@@ -50,7 +51,7 @@ const Search = () => {
 	}, [onSubmit, navigation, value]);
 
 	return (
-		<View style={styles.container}>
+		<SafeAreaView style={styles.container}>
 			<StatusBar
 				translucent={true}
 				barStyle="light-content"
@@ -78,7 +79,7 @@ const Search = () => {
 				renderItem={({item}) => (
 					<TouchableWithoutFeedback
 						onPress={() =>
-							navigation.navigate('Add', {
+							navigation.navigate(ScreenName.AddDish, {
 								title: value,
 								imageUrl: item.imageUrl,
 							})
@@ -93,7 +94,7 @@ const Search = () => {
 					</TouchableWithoutFeedback>
 				)}
 			/>
-		</View>
+		</SafeAreaView>
 	);
 };
 

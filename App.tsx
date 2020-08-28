@@ -9,37 +9,56 @@ import {SafeAreaProvider} from 'react-native-safe-area-context';
 
 import Share from './src/components/screens/Share';
 import Start from './src/components/screens/Start';
+import Dishes from './src/components/screens/Dishes';
 import Search from './src/components/screens/Search';
-import Add from './src/components/screens/Add';
+import AddDish from './src/components/screens/AddDish';
 import ReceiveSharingIntent from 'react-native-receive-sharing-intent';
 import urlRegex from 'url-regex';
 import {ColorSchemeProvider} from 'react-native-dynamic';
 
 export type RootStackParamList = {
 	Share: {urls: string[]};
-	Add: {imageUrl: string; title: string};
+	AddDish: {imageUrl: string; title: string};
 };
+
+export enum ScreenName {
+	Share = 'Share',
+	Start = 'Start',
+	Search = 'Search',
+	Dishes = 'Dishes',
+	AddDish = 'AddDish',
+}
 
 const MainStack = createStackNavigator();
 const RootStack = createStackNavigator();
 
 function MainStackScreen() {
 	return (
-		<MainStack.Navigator initialRouteName="Start" headerMode="none">
+		<MainStack.Navigator initialRouteName="Start" headerMode={'screen'}>
 			<MainStack.Screen
-				name="Start"
+				name={ScreenName.Start}
 				component={Start}
-				options={{title: '', headerTransparent: true}}
+				options={{headerShown: false}}
 			/>
 			<MainStack.Screen
-				name="Search"
+				name={ScreenName.Search}
 				component={Search}
-				options={{title: '', headerTransparent: true}}
+				options={{
+					title: '',
+					headerTransparent: true,
+					headerTintColor: '#ffffff',
+					headerShown: true,
+				}}
 			/>
 			<MainStack.Screen
-				name="Add"
-				component={Add}
-				options={{title: '', headerTransparent: true}}
+				name={ScreenName.Dishes}
+				component={Dishes}
+				options={{title: 'Gerechten', headerShown: true}}
+			/>
+			<MainStack.Screen
+				name={ScreenName.AddDish}
+				component={AddDish}
+				options={{headerShown: false}}
 			/>
 		</MainStack.Navigator>
 	);
@@ -65,14 +84,12 @@ const App = () => {
 		<NavigationContainer ref={navigation}>
 			<SafeAreaProvider>
 				<ColorSchemeProvider>
-					<RootStack.Navigator mode="modal">
+					<RootStack.Navigator
+						mode="modal"
+						screenOptions={{headerShown: false}}>
+						<RootStack.Screen name="Main" component={MainStackScreen} />
 						<RootStack.Screen
-							name="Main"
-							component={MainStackScreen}
-							options={{headerShown: false}}
-						/>
-						<RootStack.Screen
-							name="Share"
+							name={ScreenName.Share}
 							component={Share}
 							options={{title: '', headerTransparent: true}}
 						/>
