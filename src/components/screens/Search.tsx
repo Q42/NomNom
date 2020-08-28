@@ -12,6 +12,7 @@ import {
 	useDynamicValue,
 } from 'react-native-dynamic';
 import Colors from '../../styles/colors';
+import RecipeService from '../../services/recipeService';
 
 const Search = () => {
 	const styles = useDynamicValue(dynamicStyles);
@@ -20,25 +21,33 @@ const Search = () => {
 	const [items, setItems] = useState<any>([]);
 	const [value, onChangeText] = useState<string>();
 
+	const onSubmit = useCallback(async () => {
+		if (!value) {
+			return;
+		}
+		try {
+			const results = await RecipeService.getRecipesFor(value);
+			setItems(results);
+		} catch (e) {
+			console.error(e);
+		}
+	}, [value]);
+
 	useEffect(() => {
 		const keyboardDidHideListener = Keyboard.addListener(
 			'keyboardDidHide',
-			() => {
+			async () => {
 				if (!value) {
 					navigation.goBack();
 				} else {
-					setItems(mock);
+					await onSubmit();
 				}
 			},
 		);
 		return () => {
 			keyboardDidHideListener.remove();
 		};
-	}, [navigation, value]);
-
-	const onSubmit = useCallback(() => {
-		setItems(mock);
-	}, []);
+	}, [onSubmit, navigation, value]);
 
 	return (
 		<View style={styles.container}>
@@ -54,6 +63,7 @@ const Search = () => {
 						<TextInput
 							style={[styles.input, {marginTop: insets.top}]}
 							selectionColor={Colors.white}
+							autoCorrect={false}
 							autoFocus={true}
 							returnKeyType={'search'}
 							onChangeText={(text) => onChangeText(text)}
@@ -126,65 +136,3 @@ const dynamicStyles = new DynamicStyleSheet({
 		resizeMode: 'cover',
 	},
 });
-
-const mock = [
-	{
-		title: 'Tuna-meltwraps met spitskool en appel',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_120114_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1189833/tuna-meltwraps-met-spitskool-en-appel',
-	},
-	{
-		title: 'Tomatenrisotto met chorizo, spinazie en witte kaas',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_118107_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1190108/tomatenrisotto-met-chorizo-spinazie-en-witte-kaas',
-	},
-	{
-		title: 'Plaattaart met zoete aardappel, rode biet en feta',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_125743_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1192268/plaattaart-met-zoete-aardappel-rode-biet-en-feta',
-	},
-	{
-		title: 'Ravioli met tomaat, aubergine en burrata',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_110968_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1190882/ravioli-met-tomaat-aubergine-en-burrata',
-	},
-	{
-		title: 'Vegan rendang met spitskool en paddenstoelen',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_098503_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1189429/vegan-rendang-met-spitskool-en-paddenstoelen',
-	},
-	{
-		title: 'Beef rendang',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_097758_890x594_JPG.jpg',
-		url: 'https://ah.nl/allerhande/recept/R-R1189428/beef-rendang',
-	},
-	{
-		title: 'Pittige kipdrumsticks met tzatziki',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_106146_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1190404/pittige-kipdrumsticks-met-tzatziki',
-	},
-	{
-		title: 'Gnocchi ovenschotel met romige kip ',
-		imageUrl:
-			'https://static.ah.nl/static/recepten/img_RAM_PRD122160_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1192683/gnocchi-ovenschotel-met-romige-kip',
-	},
-	{
-		title: 'Kip in rendangsaus',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_097782_890x594_JPG.jpg',
-		url: 'https://ah.nl/allerhande/recept/R-R1189427/kip-in-rendangsaus',
-	},
-	{
-		title: 'Parelcouscous met tonijn, limoen & verse kruiden',
-		imageUrl: 'https://static.ah.nl/static/recepten/img_111914_890x594_JPG.jpg',
-		url:
-			'https://ah.nl/allerhande/recept/R-R1190314/parelcouscous-met-tonijn-limoen-en-verse-kruiden',
-	},
-];
